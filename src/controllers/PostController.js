@@ -9,17 +9,19 @@ module.exports = {
     },
 
     async store(req, res) {
-//console.log(req.body);
-const { nome, email, telefone, cidade } = req.body;
-    const post = await Post.create({
-nome,
-email,
-telefone,
-cidade,
-    })        
+        //console.log(req.body);
+        const { nome, email, telefone, cidade } = req.body;
+        const post = await Post.create({
+            nome,
+            email,
+            telefone,
+            cidade,
+        });
+
+        req.io.emit('post', post);
 
 
-return res.json(post);
+        return res.json(post);
 
     }
 };
